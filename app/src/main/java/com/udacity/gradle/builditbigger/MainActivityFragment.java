@@ -67,6 +67,9 @@ public class MainActivityFragment extends Fragment {
         private MyApi myApiService = null;
         private Context context;
 
+        private Listener mListener = null;
+        private Exception mError = null;
+
         @Override
         protected String doInBackground(Pair<Context, String>... params) {
             if(myApiService == null) {  // Only do this once
@@ -97,11 +100,30 @@ public class MainActivityFragment extends Fragment {
             }
         }
 
+        public EndpointsAsyncTask setListener(Listener listener) {
+            this.mListener = listener;
+            return this;
+        }
+
         @Override
         protected void onPostExecute(String result) {
             //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
             String stringJoke = result;
             startJokeActivity(context, stringJoke);
+            if (this.mListener != null)
+                this.mListener.onComplete(result, mError);
+        }
+
+        @Override
+        protected void onCancelled() {
+            if (this.mListener != null) {
+                mError = new InterruptedException("AsyncTask cancelled");
+                this.mListener.onComplete(null, mError);
+            }
+        }
+
+        public  interface Listener {
+             void onComplete(String jsonString, Exception e);
         }
     }
 

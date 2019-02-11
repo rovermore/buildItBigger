@@ -14,6 +14,13 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.3"
 
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 17
@@ -47,6 +54,10 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     endpointsServer project(path: ':backend', configuration: 'endpoints')
@@ -63,5 +74,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    androidTestImplementation 'com.android.support.test:runner:0.5'
+
     testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'com.android.support:support-annotations:23.1.0'
+    androidTestImplementation 'com.android.support.test:runner:0.4.1'
+    androidTestImplementation 'com.android.support.test:rules:0.4.1'
 }
