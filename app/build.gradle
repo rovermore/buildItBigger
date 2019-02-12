@@ -70,6 +70,8 @@ dependencies {
     implementation project (':jokedisplay')
     implementation project (':backend')
 
+    implementation 'com.android.support:multidex:1.0.3'
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

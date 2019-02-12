@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.MobileAds;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MobileAds.initialize(this, "ca-app-pub-7202966480570456~4681756901");
+        //MobileAds.initialize(this, "ca-app-pub-7202966480570456~4681756901");
 
 
     }
